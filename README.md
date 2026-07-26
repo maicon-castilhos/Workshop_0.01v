@@ -78,7 +78,7 @@ Data: 20/07/2026, Descrição: Troca de óleo, Preço: R$ 150.00, Status: OPEN
 ## Roadmap
 
 - [ ] Comparable/Comparator para ordenar ordens de serviço por data ou preço
-- [ ] Exceções customizadas para validação de regras de negócio
+- [x] Exceções customizadas para validação de regras de negócio
 - [ ] Collections (Map) para busca rápida de veículo por placa
 - [ ] Suporte a múltiplos clientes com cadastro em loop
 - [ ] Migração para Spring Boot com API REST
