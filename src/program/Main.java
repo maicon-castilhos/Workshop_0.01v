@@ -57,7 +57,15 @@ public class Main {
 		String description = sc.nextLine();
 
 		System.out.print("Preço: ");
-		double price = sc.nextDouble();
+		double price;
+		do {
+			price = sc.nextDouble();
+
+			if (price < 0) {
+				System.out.println("O preço não pode ser negativo. Tente novamente.");
+				System.out.print("Preço: ");
+			}
+		} while (price < 0);
 		sc.nextLine();
 
 		System.out.print("Status (OPEN, IN_PROGRESS, FINISHED): ");

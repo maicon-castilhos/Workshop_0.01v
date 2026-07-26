@@ -19,7 +19,7 @@ public class ServiceOrder {
                          OrderStatus status, Vehicle vehicle) {
         this.dateService = dateService;
         this.description = description;
-        this.price = price;
+        setPrice(price);
         this.status = status;
         this.vehicle = vehicle;
     }
@@ -54,6 +54,13 @@ public class ServiceOrder {
 
 	public double getPrice() {
 		return price;
+	}
+
+	public void setPrice(double price) {
+		if (price < 0) {
+			throw new IllegalArgumentException("O preço da ordem de serviço não pode ser negativo.");
+		}
+		this.price = price;
 	}
 	@Override
 	public String toString() {
