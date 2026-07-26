@@ -57,9 +57,6 @@ public class ServiceOrder {
 	}
 
 	public void setPrice(double price) {
-		if (price < 0) {
-			throw new IllegalArgumentException("O preço da ordem de serviço não pode ser negativo.");
-		}
 		this.price = price;
 	}
 	@Override
