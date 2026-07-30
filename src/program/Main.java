@@ -69,9 +69,30 @@ public class Main {
 				}
 			} while (price < 0);
 			sc.nextLine();
+			boolean valid = false;
+			OrderStatus status = null;
+			do {
 
-			System.out.print("Status (OPEN, IN_PROGRESS, FINISHED): ");
-			OrderStatus status = OrderStatus.valueOf(sc.nextLine().toUpperCase());
+				System.out.print("Status (1.Open, 2.In progress, 3.Finished): ");
+				int changeStatus = sc.nextInt();
+
+				switch (changeStatus) {
+				case 1:
+					status = OrderStatus.OPEN;
+					valid = true;
+					break;
+				case 2:
+					status = OrderStatus.IN_PROGRESS;
+					valid = true;
+					break;
+				case 3:
+					status = OrderStatus.FINISHED;
+					valid = true;
+					break;
+				default:
+					System.out.println("Opção inválida! Tente novamente.");
+				}
+			} while (!valid);
 
 			ServiceOrder serviceOrder = new ServiceOrder(dateService, description, price, status, vehicle);
 
@@ -79,11 +100,13 @@ public class Main {
 
 			System.out.println("\n========== DADOS FINAIS ==========");
 			System.out.println(client);
-		} catch (NumberFormatException e) {
+		} catch (
+
+		NumberFormatException e) {
 			System.out.println("Erro: não é um número válido!");
-		}catch (DateTimeParseException e) {
+		} catch (DateTimeParseException e) {
 			System.out.println("Erro: não é uma data válida!");
-		}catch (InputMismatchException e) {
+		} catch (InputMismatchException e) {
 			System.out.println("Erro: formato inválido");
 		}
 		sc.close();
