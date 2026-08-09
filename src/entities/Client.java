@@ -3,21 +3,31 @@ package entities;
 import java.util.ArrayList;
 
 public class Client {
+	private Integer id;
 	private String name;
 	private String cellphone;
 	private String email;
 
-	private ArrayList<Vehicle> vehicles = new ArrayList<>();
-	
-	public Client() {
+	private final ArrayList<Vehicle> vehicles = new ArrayList<>();
 
+	public Client() {
 	}
 
-	public Client(String name, String cellphone, String email) {
+	public Client(Integer id, String name, String cellphone, String email) {
+		this.id = id;
 		this.name = name;
 		this.cellphone = cellphone;
 		this.email = email;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 
 	public String getCellphone() {
 		return cellphone;

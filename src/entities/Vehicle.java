@@ -4,22 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vehicle {
+	private Integer id;
 	private String plate;
 	private String model;
 	private String mark;
 	private int year;
+	private Client client;
 
 	public Vehicle() {
-
 	}
 
-	public Vehicle(String plate, String model, String mark, int year) {
+	public Vehicle(Integer id, String plate, String model, String mark, int year) {
+		this.id = id;
 		this.plate = plate;
 		this.model = model;
 		this.mark = mark;
 		this.year = year;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+	}
 	public String getPlate() {
 		return plate;
 	}

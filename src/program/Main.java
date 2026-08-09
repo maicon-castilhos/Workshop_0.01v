@@ -3,11 +3,7 @@ package program;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 import entities.Client;
 import entities.ServiceOrder;
@@ -24,11 +20,10 @@ public class Main {
         int opcao;
 
         do {
-            System.out.println("\n1-Novo cliente | 2-Novo veículo | 3-Nova OS | 4-Listar | 5-Sair");
+            System.out.println("\n1-Novo cliente | 2-Novo veículo | 3-Nova OS | 4-Buscar | 5-Sair");
             System.out.print("Opção: ");
             opcao = sc.nextInt();
             sc.nextLine();
-
             switch (opcao) {
                 case 1:
                     Client novoCliente = cadastrarCliente(sc);
@@ -56,7 +51,16 @@ public class Main {
                     break;
 
                 case 4:
-                    listarTudo(clients);
+                    System.out.print("Nome do Cliente: ");
+                    String nome = sc.nextLine();
+                    Optional<Client> resultado = clients.stream()
+                            .filter(c -> c.getName().equalsIgnoreCase(nome))
+                            .findFirst();
+                    if (resultado.isPresent()) {
+                        System.out.println("Encontrado: " + resultado.get());
+                    } else {
+                        System.out.println("Cliente não encontrado.");
+                    }
                     break;
 
                 case 5:
@@ -84,7 +88,7 @@ public class Main {
         System.out.print("E-mail: ");
         String email = sc.nextLine();
 
-        return new Client(name, cellphone, email);
+        return new Client(null, name, cellphone, email);
     }
 
     static void cadastrarVeiculo(Scanner sc, List<Client> clients) {
@@ -107,7 +111,8 @@ public class Main {
         int year = sc.nextInt();
         sc.nextLine();
 
-        Vehicle vehicle = new Vehicle(plate, model, brand, year);
+        Vehicle vehicle = new Vehicle(null, plate, model, brand, year);
+        vehicle.setClient(client);
         client.addVehicle(vehicle);
 
         System.out.println("Veículo cadastrado para " + client.getName() + "!");
@@ -146,7 +151,7 @@ public class Main {
 
         OrderStatus status = selecionarStatus(sc);
 
-        ServiceOrder serviceOrder = new ServiceOrder(dateService, description, price, status, vehicle);
+        ServiceOrder serviceOrder = new ServiceOrder(null, dateService, description, price, status, vehicle);
         vehicle.addServiceOrder(serviceOrder);
 
         System.out.println("Ordem de serviço cadastrada para o veículo " + vehicle.getPlate() + "!");
