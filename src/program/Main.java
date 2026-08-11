@@ -2,6 +2,7 @@ package program;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
@@ -28,6 +29,7 @@ public class Main {
                 case 1:
                     Client novoCliente = cadastrarCliente(sc);
                     clients.add(novoCliente);
+                    System.out.println("Cliente cadastrado com sucesso!");
                     break;
 
                 case 2:
@@ -51,13 +53,13 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.print("Nome do Cliente: ");
-                    String nome = sc.nextLine();
+                    System.out.print("CPF do cliente: ");
+                    String cpf = sc.nextLine();
                     Optional<Client> resultado = clients.stream()
-                            .filter(c -> c.getName().equalsIgnoreCase(nome))
+                            .filter(c -> c.getCpf().equals(cpf))
                             .findFirst();
                     if (resultado.isPresent()) {
-                        System.out.println("Encontrado: " + resultado.get());
+                        System.out.print("Encontrado! \n" + resultado.get());
                     } else {
                         System.out.println("Cliente não encontrado.");
                     }
@@ -82,13 +84,16 @@ public class Main {
         System.out.print("Nome: ");
         String name = sc.nextLine();
 
+        System.out.print("CPF: ");
+        String cpf = sc.nextLine();
+
         System.out.print("Celular: ");
         String cellphone = sc.nextLine();
 
         System.out.print("E-mail: ");
         String email = sc.nextLine();
 
-        return new Client(null, name, cellphone, email);
+        return new Client(null, name, cpf, cellphone, email);
     }
 
     static void cadastrarVeiculo(Scanner sc, List<Client> clients) {
@@ -129,7 +134,9 @@ public class Main {
             return;
         }
 
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+                .appendPattern("d/M/yyyy")
+                .toFormatter();
 
         System.out.println("\nDados da ordem de serviço:");
         System.out.print("Data do serviço (dd/MM/yyyy): ");

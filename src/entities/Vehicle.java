@@ -33,6 +33,7 @@ public class Vehicle {
 		return client;
 	}
 	public void setClient(Client client) {
+		this.client = client;
 	}
 	public String getPlate() {
 		return plate;
